@@ -52,7 +52,7 @@ public class CCL_Client extends Thread {
 		} catch (IOException e) {
 			System.out.println("Server not found !");
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(10);
 			} catch (InterruptedException e1) {
 				System.out.println("wait reconnecting error ");
 			}

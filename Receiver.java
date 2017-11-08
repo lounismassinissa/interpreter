@@ -110,7 +110,7 @@ public class Receiver implements Runnable {
 			String vId = tab[2];
 			String nbNei = tab[3];
 			String[] vPos = {tab[4],tab[5]};
-			Interpreter.onLed(1);
+			//Interpreter.onLed(1);
 			interpreter = new Interpreter(mainScript);
 
 			Sensor.virtualId = vId;
