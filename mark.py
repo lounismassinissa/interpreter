@@ -1,6 +1,6 @@
 import Sensor
 
-while 1:
+while True:
 	Sensor.delay(1000)
 	Sensor.mark()
 	Sensor.delay(1000)

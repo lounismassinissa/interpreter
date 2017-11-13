@@ -1,7 +1,8 @@
 
 import java.util.LinkedList;
-
-
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.FileNotFoundException;
 
 public class Sensor {
 
@@ -45,6 +46,11 @@ public class Sensor {
 		return "";
 	}
 
+	public static int getId(){
+		System.out.println("getId");
+		return Integer.valueOf(virtualId);
+	}
+
 	public synchronized static boolean available(){
 		if(buffer.size()>0) return true;
 		else return false;
@@ -53,15 +59,35 @@ public class Sensor {
 	public synchronized static void mark(){
 
 		com.mark(COMMAND.MARK+" "+1);
-		Interpreter.onLed(0);
+		System.out.println("mark");
 		
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("leds.conf", "UTF-8");
+			writer.println("1");
+			writer.close();
+
+		} catch (FileNotFoundException e) {
+		} catch (UnsupportedEncodingException e) {
+
+		}
 
 	}
 
 	public synchronized static void unmark(){
 
 		com.mark(COMMAND.MARK+" "+0);
-		Interpreter.offLed(0);
+		System.out.println("unmark");
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("leds.conf", "UTF-8");
+			writer.println("0");
+			writer.close();
+
+		} catch (FileNotFoundException e) {
+		} catch (UnsupportedEncodingException e) {
+
+		}
 		
 
 	}
@@ -110,6 +136,7 @@ public class Sensor {
 	}
 	// wait version 2
 	public static void attendre(){
+		System.out.println("attendre");
 		try {
 			synchronized(Monitor.lock){
 				if(!available()) Monitor.lock.wait();
@@ -119,7 +146,7 @@ public class Sensor {
 		}
 	}
 	public static void attendre(int time){
-
+		System.out.println("attendre time");
 		try {
 			synchronized(Monitor.lock){
 				if(!available()) Monitor.lock.wait(time);
